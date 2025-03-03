@@ -1,0 +1,14 @@
+{
+  "name": "mattermost-mentions-menu-plugin",
+  "version": "0.1.0",
+  "description": "Relocates mentions button to left sidebar menu below threads",
+  "scripts": {
+    "build": "cd webapp && npm run build",
+    "install:webapp": "cd webapp && npm install",
+    "dev": "cd webapp && npm run dev",
+    "package": "mkdir -p dist && tar -czf dist/mattermost-mentions-menu-plugin.tar.gz plugin.json webapp/dist/main.js",
+    "clean": "rm -rf webapp/dist dist",
+    "all": "npm run install:webapp && npm run build && npm run package"
+  },
+  "license": "MIT"
+}
