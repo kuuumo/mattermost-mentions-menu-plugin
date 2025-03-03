@@ -13,40 +13,79 @@ Mattermostの「メンション」（@マーク）ボタンを右上から左側
 
 （※実装後にスクリーンショットを追加してください）
 
-## インストール方法
+## ビルド方法
 
-### プリビルドバージョン
+このプラグインをビルドするには、複数の方法があります：
 
-1. [リリースページ](https://github.com/kuuumo/mattermost-mentions-menu-plugin/releases)から最新のリリースをダウンロードします
-2. Mattermostの管理コンソールにアクセスします
-3. **プラグイン管理 > プラグインのアップロード**に移動します
-4. ダウンロードした `.tar.gz` ファイルをアップロードします
-5. **有効化**ボタンをクリックして、プラグインを有効にします
+### Taskを使う方法（推奨）
 
-### ソースからビルド
+[Task](https://taskfile.dev/)がインストールされている場合:
 
-プラグインを自分でビルドするには、以下の手順に従ってください：
-
-1. リポジトリをクローンします
 ```bash
-git clone https://github.com/kuuumo/mattermost-mentions-menu-plugin.git
-cd mattermost-mentions-menu-plugin
+# 依存関係のインストール、ビルド、パッケージ化を一度に行う
+task
+
+# または個別のステップを実行
+task install    # 依存関係のインストール
+task build      # ビルド
+task package    # パッケージ化
+task clean      # ビルド成果物のクリーン
+task dev        # 開発モードで実行（変更監視）
 ```
 
-2. 依存関係をインストールし、ビルドします
+### Makeを使う方法
+
 ```bash
-# フロントエンド（Webapp）をビルド
+# 依存関係のインストール、ビルド、パッケージ化を一度に行う
+make
+
+# または個別のステップを実行
+make install    # 依存関係のインストール
+make build      # ビルド
+make package    # パッケージ化
+make clean      # ビルド成果物のクリーン
+make dev        # 開発モードで実行（変更監視）
+```
+
+### npmを使う方法
+
+```bash
+# 依存関係のインストール、ビルド、パッケージ化を一度に行う
+npm run all
+
+# または個別のステップを実行
+npm run install:webapp    # 依存関係のインストール
+npm run build             # ビルド
+npm run package           # パッケージ化
+npm run clean             # ビルド成果物のクリーン
+npm run dev               # 開発モードで実行（変更監視）
+```
+
+### 手動でコマンドを実行する方法
+
+```bash
+# 依存関係のインストール
 cd webapp
 npm install
+cd ..
+
+# ビルド
+cd webapp
 npm run build
 cd ..
 
-# プラグインバンドルを作成
+# パッケージ化
 mkdir -p dist
 tar -czf dist/mattermost-mentions-menu-plugin.tar.gz plugin.json webapp/dist/main.js
 ```
 
-3. 生成された `dist/mattermost-mentions-menu-plugin.tar.gz` ファイルをMattermostにアップロードします
+## インストール方法
+
+1. 上記のいずれかの方法でプラグインをビルドしパッケージ化します
+2. Mattermostの管理コンソールにアクセスします
+3. **システムコンソール** > **プラグイン管理** > **プラグインのアップロード** に移動します
+4. 生成された `dist/mattermost-mentions-menu-plugin.tar.gz` ファイルをアップロードします
+5. **有効化** ボタンをクリックしてプラグインを有効にします
 
 ## 開発環境のセットアップ
 
@@ -55,15 +94,7 @@ tar -czf dist/mattermost-mentions-menu-plugin.tar.gz plugin.json webapp/dist/mai
 - Node.js 14以上
 - npm 7以上
 - Mattermost Server 5.12.0以上
-
-### 開発用ビルド
-
-```bash
-# Webアプリを開発モードでビルド（ファイル変更を監視）
-cd webapp
-npm install
-npm run dev
-```
+- （オプション）[Task](https://taskfile.dev/)または`make`コマンド
 
 ## トラブルシューティング
 
