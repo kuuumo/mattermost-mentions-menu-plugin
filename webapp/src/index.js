@@ -1,5 +1,3 @@
-import {Store} from 'redux';
-
 import manifest from '../manifest';
 import {LeftSidebar} from './components/left_sidebar';
 
