@@ -41,17 +41,9 @@ npm install
 npm run build
 cd ..
 
-# Goのサーバー部分をビルド
-# Make sure you have Go installed (version 1.16+)
-cd server
-go build -o dist/plugin-linux-amd64 # Linux用
-# Macの場合は: go build -o dist/plugin-darwin-amd64
-# Windowsの場合は: go build -o dist/plugin-windows-amd64.exe
-cd ..
-
 # プラグインバンドルを作成
 mkdir -p dist
-tar -czf dist/mattermost-mentions-menu-plugin.tar.gz plugin.json webapp/dist/main.js server/dist/
+tar -czf dist/mattermost-mentions-menu-plugin.tar.gz plugin.json webapp/dist/main.js
 ```
 
 3. 生成された `dist/mattermost-mentions-menu-plugin.tar.gz` ファイルをMattermostにアップロードします
@@ -60,7 +52,6 @@ tar -czf dist/mattermost-mentions-menu-plugin.tar.gz plugin.json webapp/dist/mai
 
 ### 必要条件
 
-- Go 1.16以上
 - Node.js 14以上
 - npm 7以上
 - Mattermost Server 5.12.0以上
@@ -104,6 +95,10 @@ A: いいえ、現在の実装では右上のボタンは非表示にならず�
 **Q: このプラグインはモバイルアプリでも機能しますか？**
 
 A: いいえ、このプラグインはウェブアプリケーション専用です。Mattermostのモバイルアプリには影響しません。
+
+**Q: このプラグインはフロントエンドのみですか？**
+
+A: はい、このプラグインはUIの変更のみを行うフロントエンド専用のプラグインです。サーバーサイドのコードは含まれていません。
 
 ## ライセンス
 
