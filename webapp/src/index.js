@@ -1,13 +1,20 @@
-import manifest from '../manifest';
-import {LeftSidebar} from './components/left_sidebar';
+import manifest from "../manifest";
+import React from "react";
+import MentionsButton from "./components/mentions_button";
 
-export default class Plugin {
-    /**
-     * @param {object} registry - Mattermost Plugin Registry
-     */
-    initialize(registry) {
-        registry.registerLeftSidebarHeaderComponent(LeftSidebar);
+class Plugin {
+  initialize(registry, store) {
+    const MentionsSidebarButton = () => {
+      return <MentionsButton />;
+    };
+
+    console.log("registerLeftSidebarHeaderComponent");
+
+    if (registry.registerLeftSidebarHeaderComponent) {
+      console.log("registerLeftSidebarHeaderComponent");
+      registry.registerLeftSidebarHeaderComponent(MentionsSidebarButton);
     }
+  }
 }
 
 window.registerPlugin(manifest.id, new Plugin());

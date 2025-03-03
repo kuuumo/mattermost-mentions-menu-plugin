@@ -5,14 +5,14 @@ tasks:
     desc: Install dependencies
     dir: webapp
     cmds:
-      - npm install
+      - bun install
 
   build:
     desc: Build the plugin
     dir: webapp
     deps: [install]
     cmds:
-      - npm run build
+      - bun run build
 
   clean:
     desc: Clean build artifacts
@@ -31,7 +31,7 @@ tasks:
     desc: Start development mode with watching
     dir: webapp
     cmds:
-      - npm run dev
+      - bun run dev
 
   default:
     desc: Clean, build and package the plugin
