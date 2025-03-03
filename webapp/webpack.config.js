@@ -9,12 +9,12 @@ module.exports = {
             'src',
             'node_modules',
         ],
-        extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
+        extensions: ['*', '.js', '.jsx'],
     },
     module: {
         rules: [
             {
-                test: /\.(js|jsx|ts|tsx)$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
@@ -29,29 +29,13 @@ module.exports = {
                                     safari: 12,
                                 },
                                 modules: false,
-                                corejs: 3,
                                 debug: false,
                                 useBuiltIns: 'usage',
-                                shippedProposals: true,
+                                corejs: 3,
                             }],
-                            ['@babel/typescript', {
-                                allExtensions: true,
-                                isTSX: true,
-                            }],
-                        ],
-                        plugins: [
-                            '@babel/plugin-proposal-class-properties',
-                            '@babel/plugin-proposal-object-rest-spread',
                         ],
                     },
                 },
-            },
-            {
-                test: /\.(css|scss)$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                ],
             },
         ],
     },
@@ -60,7 +44,6 @@ module.exports = {
         redux: 'Redux',
         'react-redux': 'ReactRedux',
         'prop-types': 'PropTypes',
-        'react-bootstrap': 'ReactBootstrap',
         'mattermost-webapp/plugins': 'registerPlugin',
     },
     output: {
