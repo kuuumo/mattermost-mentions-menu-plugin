@@ -14,6 +14,12 @@ tasks:
     cmds:
       - npm run build
 
+  clean:
+    desc: Clean build artifacts
+    cmds:
+      - rm -rf webapp/dist
+      - rm -rf dist
+
   package:
     desc: Package the plugin
     deps: [build]
@@ -27,19 +33,15 @@ tasks:
     cmds:
       - npm run dev
 
-  clean:
-    desc: Clean build artifacts
-    cmds:
-      - rm -rf webapp/dist
-      - rm -rf dist
-
   default:
-    desc: Build and package the plugin
-    deps: [package]
+    desc: Clean, build and package the plugin
+    cmds:
+      - task: clean
+      - task: package
 
   deploy:
-    desc: Build, package and deploy to local Mattermost server
-    deps: [package]
+    desc: Clean, build, package and deploy to local Mattermost server
     cmds:
+      - task: default
       - echo "Upload dist/mattermost-mentions-menu-plugin.tar.gz to your Mattermost server"
       - echo "Access System Console > Plugins Management > Upload Plugin"
