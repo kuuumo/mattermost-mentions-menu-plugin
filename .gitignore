@@ -1,0 +1,23 @@
+# Dependencies
+node_modules
+npm-debug.log
+.npm
+
+# Build
+dist
+webapp/dist
+webapp/node_modules
+
+# IDE
+.vscode
+.idea
+*.iml
+*.swp
+*.swo
+
+# OS
+.DS_Store
+*.db
+
+# Generated files
+coverage
