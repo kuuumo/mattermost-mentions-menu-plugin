@@ -1,44 +1,6 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {
-    GlobalHeaderNavItem,
-    GlobalHeaderGlobalItemIcon,
-} from '@mattermost/components';
 import {FaAt} from 'react-icons/fa';
-import styled from 'styled-components';
-
-const MentionsButton = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0 16px;
-    margin: 10px 0;
-    color: rgba(var(--sidebar-text-rgb), 0.6);
-    cursor: pointer;
-    
-    &:hover {
-        color: rgba(var(--sidebar-text-rgb), 1);
-    }
-    
-    &.active {
-        color: var(--sidebar-text);
-    }
-    
-    .mention-badge {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 3px;
-        font-size: 11px;
-        font-weight: 600;
-        border-radius: 8px;
-        padding: 0 4px;
-        min-width: 16px;
-        height: 16px;
-        background-color: var(--sidebar-text);
-        color: var(--sidebar-bg);
-    }
-`;
 
 export const LeftSidebar = () => {
     const mentionsCounter = useSelector((state) => {
@@ -64,19 +26,45 @@ export const LeftSidebar = () => {
         });
     };
     
+    const mentionBadgeStyle = {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft: '3px',
+        fontSize: '11px',
+        fontWeight: '600',
+        borderRadius: '8px',
+        padding: '0 4px',
+        minWidth: '16px',
+        height: '16px',
+        backgroundColor: 'var(--sidebar-text)',
+        color: 'var(--sidebar-bg)',
+    };
+    
+    const buttonStyle = {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        padding: '0 16px',
+        margin: '10px 0',
+        color: 'rgba(var(--sidebar-text-rgb), 0.6)',
+        cursor: 'pointer',
+    };
+    
     return (
-        <MentionsButton
+        <div 
             onClick={handleMentionsClick}
+            style={buttonStyle}
             className={mentionsCounter > 0 ? 'active' : ''}
         >
             <FaAt size={20} />
             <span style={{marginLeft: '8px'}}>メンション</span>
             {mentionsCounter > 0 && (
-                <div className="mention-badge">
+                <div style={mentionBadgeStyle}>
                     {mentionsCounter > 99 ? '99+' : mentionsCounter}
                 </div>
             )}
-        </MentionsButton>
+        </div>
     );
 };
 
