@@ -44,7 +44,6 @@ module.exports = {
         redux: 'Redux',
         'react-redux': 'ReactRedux',
         'prop-types': 'PropTypes',
-        'mattermost-webapp/plugins': 'registerPlugin',
     },
     output: {
         path: path.join(__dirname, '/dist'),
