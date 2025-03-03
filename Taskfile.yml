@@ -1,0 +1,45 @@
+version: '3'
+
+tasks:
+  install:
+    desc: Install dependencies
+    dir: webapp
+    cmds:
+      - npm install
+
+  build:
+    desc: Build the plugin
+    dir: webapp
+    deps: [install]
+    cmds:
+      - npm run build
+
+  package:
+    desc: Package the plugin
+    deps: [build]
+    cmds:
+      - mkdir -p dist
+      - tar -czf dist/mattermost-mentions-menu-plugin.tar.gz plugin.json webapp/dist/main.js
+
+  dev:
+    desc: Start development mode with watching
+    dir: webapp
+    cmds:
+      - npm run dev
+
+  clean:
+    desc: Clean build artifacts
+    cmds:
+      - rm -rf webapp/dist
+      - rm -rf dist
+
+  default:
+    desc: Build and package the plugin
+    deps: [package]
+
+  deploy:
+    desc: Build, package and deploy to local Mattermost server
+    deps: [package]
+    cmds:
+      - echo "Upload dist/mattermost-mentions-menu-plugin.tar.gz to your Mattermost server"
+      - echo "Access System Console > Plugins Management > Upload Plugin"
